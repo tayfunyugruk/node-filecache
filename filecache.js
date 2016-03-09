@@ -59,7 +59,7 @@ function generate(p, options, em) {
         }
 
         var p = queue.shift()
-        // console.log(p)
+        console.log(p)
 
         fs.stat(p, function (err, s) {
             if (err) return em.emit('error', err)
@@ -74,10 +74,10 @@ function generate(p, options, em) {
                     }
 
                     if (options.watchDirectoryChange) {
-                        var watcher = fs.watch(p)
+                        var watcher = fs.watch(p);
                         watcher.on('change', function (event, filename) {
                             // console.log('watcher change: %s, %s (%s)', event, filename, p)
-                            watcher.close()
+                            watcher.close();
                             generate(p, options, em)
                         })
                     }
@@ -165,9 +165,9 @@ function filecache(dir, defaultOptions, cb) {
         }
 
     var cache = {}
-        , em = new EventEmitter()
+        , em = new EventEmitter();
 
-    em.cache = cache
+    em.cache = cache;
 
     em.on('contents', function (d) {
         if (cache[d.k] && cache[d.k].p !== d.p) {
