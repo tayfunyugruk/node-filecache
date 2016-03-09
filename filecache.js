@@ -58,8 +58,17 @@ function generate(p, options, em) {
             return
         }
 
-        var p = queue.shift()
-        console.log(p)
+        var p = queue.shift();
+        //console.log(p)
+
+        if (options.skipFiles) {
+            options.skipFiles.forEach(function (fileRegex) {
+                if (p.indexOf(fileRegex) > -1) {
+                    read();
+                    return;
+                }
+            });
+        }
 
         fs.stat(p, function (err, s) {
             if (err) return em.emit('error', err)
