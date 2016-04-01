@@ -109,6 +109,7 @@ function create(options, fc) {
         }
 
         if (options.allowOrigin) {
+            headers['Access-Control-Allow-Headers'] = 'X-DevTools-Emulate-Network-Conditions-Client-Id';
             headers['Access-Control-Allow-Origin'] = options.allowOrigin;
         }
         // sends the contents
