@@ -10,7 +10,7 @@ function create(options, fc) {
     if (!(options != null)) {
         options =
         {
-            etag: true
+            etag: false
             , lastmod: true
             , expires: 3600000 // milliseconds
             , maxAge: 3600     // seconds
@@ -67,7 +67,9 @@ function create(options, fc) {
                     res.end()
                     return next && next(false)
                 }
-                headers['ETag'] = contents.hash
+                if (contents.hash) {
+                    headers['ETag'] = contents.hash;
+                }
             }
 
             if (options.lastmod) {
@@ -113,7 +115,7 @@ function create(options, fc) {
             headers['Access-Control-Allow-Origin'] = options.allowOrigin;
         }
         // sends the contents
-        headers['Content-Length'] = contents.length
+        headers['Content-Length'] = contents.length;
         res.writeHead(statusCode, headers)
         res.end(contents)
 
